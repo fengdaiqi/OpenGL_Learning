@@ -138,6 +138,7 @@ int main()
                 glClear(GL_COLOR_BUFFER_BIT); 
 
                 glUseProgram(ShaderProgram);
+                //no need to bind every time,just one time is OK
                 glBindVertexArray(VAO);
                 //glDrawArrays(GL_TRIANGLES,0,3);
                 glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
