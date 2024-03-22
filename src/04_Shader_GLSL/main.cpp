@@ -1,6 +1,5 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
 #include <iostream>
 #include <math.h>
 
@@ -12,6 +11,10 @@ void colorChange(int uniLocation);
 const unsigned int SCR_WIDTH = 1440;
 const unsigned int SCR_HEIGHT = 1080;
 
+// Vertex shader source code used for rendering vertices
+// Defines input attributes such as position and color
+// Calculates the final position of the vertex and output color
+// The version 330 core indicates the shader version used
 const char *vertexShaderSource ="#version 330 core\n"
     "layout (location = 0) in vec3 aPos;\n"
     "layout (location = 1) in vec3 aColor;\n"

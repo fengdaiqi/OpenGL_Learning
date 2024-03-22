@@ -50,5 +50,6 @@
                 "cinttypes": "cpp",
                 "typeinfo": "cpp"
         },
-        "svn.ignoreMissingSvnWarning": true
+        "svn.ignoreMissingSvnWarning": true,
+        "cmake.sourceDirectory": "G:/Learing_Lib/OpenGL/Project/Old_version/OpenGL_Learning/include/glm"
 }
