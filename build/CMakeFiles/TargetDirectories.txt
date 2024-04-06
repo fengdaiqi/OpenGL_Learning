@@ -1,2 +1,0 @@
-G:/Learing_Lib/OpenGL/Project/Old_version/OpenGL_Learning/build/CMakeFiles/ALL_BUILD.dir
-G:/Learing_Lib/OpenGL/Project/Old_version/OpenGL_Learning/build/CMakeFiles/ZERO_CHECK.dir
