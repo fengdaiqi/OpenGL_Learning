@@ -44,10 +44,10 @@ int main(int argc, char *argv[])
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
   Shader ourShader("./Shader/vertex.vs", "./Shader/fragment.fs");
- 
+
   // 顶点数据
   float vertices[] = {
-      //     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
+      //---- 位置 ----  ---- 颜色 ----     - 纹理坐标 -
       0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,  // 右上
       0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // 右下
       -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0, 0.0f, // 左下
@@ -59,7 +59,8 @@ int main(int argc, char *argv[])
       0, 1, 3, // 三角形一
       1, 2, 3  // 三角形二
   };
-    // 创建缓冲对象
+
+  // 创建缓冲对象
   unsigned int VBO, EBO, VAO;
   glGenVertexArrays(1, &VAO);
   glGenBuffers(1, &VBO);
@@ -100,19 +101,18 @@ int main(int argc, char *argv[])
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-  //flip the y-axis of the texture
+  // flip the y-axis of the texture
   stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
-  
+
   int width, height, nrChannels;
   unsigned char *data = stbi_load("./static/texture/container.jpg", &width, &height, &nrChannels, 0);
-  if(data)
+  if (data)
   {
-    //这里是RGB，出错半个小时 
-    glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,width,height,0,GL_RGB,GL_UNSIGNED_BYTE,data);
+    // 这里是RGB，出错半个小时
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);
   }
   stbi_image_free(data);
-
 
   glGenTextures(1, &texture_face);
   glBindTexture(GL_TEXTURE_2D, texture_face);
@@ -137,7 +137,7 @@ int main(int argc, char *argv[])
   ourShader.setInt("texture_box", 0);
   ourShader.setInt("texture_face", 1);
 
-  float NumMix=0.0f;
+  float NumMix = 0.0f;
 
   while (!glfwWindowShouldClose(window))
   {
@@ -147,16 +147,16 @@ int main(int argc, char *argv[])
     // ...
     glClearColor(25.0 / 255.0, 85.0 / 255.0, 195.0 / 255.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
-    ourShader.use();   
+    ourShader.use();
 
-    NumMix=glfwGetTime();
+    NumMix = glfwGetTime();
     ourShader.setFloat("NumMix", NumMix);
+
     // 绑定纹理
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture_box);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, texture_face);
-    
     // 绘制物体
     glBindVertexArray(VAO); // 不需要每次都绑定，对于当前程序其实只需要绑定一次就可以了
     // glDrawArrays(GL_POINTS, 0, 6);
