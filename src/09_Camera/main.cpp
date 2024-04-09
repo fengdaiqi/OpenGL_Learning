@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include <tool/shader.h>
+#include <tool/camera.h>
 #include <geometry/BoxGeometry.h>
 #include <geometry/PlaneGeometry.h>
 #include <geometry/SphereGeometry.h>
