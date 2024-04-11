@@ -145,7 +145,7 @@ int main(int argc, char *argv[])
 
     glm::mat4 qularXYZ = glm::eulerAngleXYZ(45.0f, 45.0f, 45.0f);
 
-    float fov = 45.0f; // 视锥体的角度
+    float fov = 75.0f; // 视锥体的角度
     glm::vec3 view_translate = glm::vec3(0.0, 0.0, -5.0);
     ImVec4 clear_color = ImVec4(65.0 / 255.0, 65.0 / 255.0, 65.0 / 255.0, 1.0);
 
@@ -200,16 +200,24 @@ int main(int argc, char *argv[])
 
         glm::qua<float> qu = glm::qua<float>(glm::vec3(rotate, rotate, rotate));
         model = glm::mat4_cast(qu);
-
+        glm::vec3 lightPos = glm::vec3(sin(glfwGetTime()) * 3, 1.0, 4.0);
         ourShader.setMat4("view", view);
         ourShader.setMat4("projection", projection);
-
         ourShader.setMat4("model", model);
+        ourShader.setVec3("viewPos", camera.Position);
+
+        // set material parament
+        ourShader.setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
+        ourShader.setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
+        ourShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+        ourShader.setFloat("material.shininess", 32.0f);
+        // set light parament
+        ourShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+        ourShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f); // 将光照调暗了一些以搭配场景
+        ourShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+        ourShader.setVec3("light.postion", lightPos);
         glBindVertexArray(boxGeometry.VAO);
         glDrawElements(GL_TRIANGLES, boxGeometry.indices.size(), GL_UNSIGNED_INT, 0);
-
-        glm::vec3 lightPos = glm::vec3(2.0, 1.5, 0.0);
-        ourShader.setVec3("lightPos", lightPos);
 
         // 绘制灯光物体
         lightObjectShader.use();
